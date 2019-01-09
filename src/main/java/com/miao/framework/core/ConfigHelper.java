@@ -1,9 +1,7 @@
 package com.miao.framework.core;
 
-import com.miao.framework.FrameworkConstant;
+import com.miao.framework.constant.FrameworkConstant;
 import com.miao.framework.util.PropsUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 

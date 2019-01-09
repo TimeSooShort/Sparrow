@@ -1,6 +1,8 @@
 package com.miao.framework;
 
 import com.miao.framework.core.ConfigHelper;
+import com.miao.framework.core.classScanner.ClassScanner;
+import com.miao.framework.core.classScanner.impl.DefaultClassScanner;
 import com.miao.framework.util.ObjectUtil;
 import com.miao.framework.util.StringUtil;
 
@@ -16,6 +18,19 @@ public class InstanceFactory {
      * 存储实现类的实例
      */
     private static final Map<String, Object> cache = new ConcurrentHashMap<String, Object>();
+
+    /**
+     * ClassScanner
+     */
+    private static final String CLASS_SCANNER = "sparrow.framework.custom.class_scanner";
+
+    /**
+     * 获取ClassScanner
+     */
+    public static ClassScanner getClassScanner() {
+        return getInstance(CLASS_SCANNER, DefaultClassScanner.class);
+    }
+
 
     @SuppressWarnings("unchecked")
     private static <T> T getInstance(String cacheKey, Class<T> defaultImplClass) {
