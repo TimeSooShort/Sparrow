@@ -18,6 +18,13 @@ public class ClassUtil {
     }
 
     /**
+     * 加载类并初始化
+     */
+    public static Class<?> loadClass(String className) {
+        return loadClass(className, true);
+    }
+
+    /**
      * 加载类
      */
     public static Class<?> loadClass(String className, boolean isInitialize) {

@@ -23,7 +23,7 @@ public abstract class ClassTemplate {
 
     private static final Logger logger = LoggerFactory.getLogger(ClassTemplate.class);
 
-    private final String packageName;
+    protected final String packageName; // protected
 
     public ClassTemplate(String packageName) {
         this.packageName = packageName;

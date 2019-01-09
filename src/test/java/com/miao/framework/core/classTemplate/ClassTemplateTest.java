@@ -1,5 +1,6 @@
 package com.miao.framework.core.classTemplate;
 
+import com.miao.framework.core.ConfigHelper;
 import com.miao.framework.util.ClassUtil;
 import org.junit.Test;
 
@@ -30,5 +31,11 @@ public class ClassTemplateTest {
             e.printStackTrace();
         }
 
+    }
+
+    @Test
+    public void testSome() {
+        String packagename = "com.miao.framework";
+        System.out.println(ConfigHelper.class.getName().startsWith(packagename));
     }
 }
