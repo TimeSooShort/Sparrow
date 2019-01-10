@@ -5,6 +5,7 @@ import com.miao.framework.util.ClassUtil;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.Enumeration;
 
@@ -35,7 +36,9 @@ public class ClassTemplateTest {
 
     @Test
     public void testSome() {
-        String packagename = "com.miao.framework";
-        System.out.println(ConfigHelper.class.getName().startsWith(packagename));
+        Field[] fields = com.miao.framework.Test.class.getDeclaredFields();
+        for (Field field : fields) {
+            System.out.println(field.getType());
+        }
     }
 }

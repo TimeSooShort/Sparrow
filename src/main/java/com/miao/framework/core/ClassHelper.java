@@ -4,6 +4,7 @@ import com.miao.framework.InstanceFactory;
 import com.miao.framework.constant.FrameworkConstant;
 import com.miao.framework.core.classScanner.ClassScanner;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
 
 /**
@@ -26,5 +27,19 @@ public class ClassHelper {
      */
     public static List<Class<?>> getClassList() {
         return scanner.getClassList(BASE_PACKAGE);
+    }
+
+    /**
+     * 获取指定包下的指定接口或类的子类
+     */
+    public static List<Class<?>> getClassListBySuper(Class<?> superClass) {
+        return scanner.getClassBySuperClass(BASE_PACKAGE, superClass);
+    }
+
+    /**
+     * 获取被指定注解标识的类
+     */
+    public static List<Class<?>> getClassListByAnnotation(Class<? extends Annotation> annotation) {
+        return scanner.getClassByAnnotation(BASE_PACKAGE, annotation);
     }
 }
