@@ -5,15 +5,20 @@ import com.miao.framework.aop.annotation.Aspect;
 import com.miao.framework.aop.annotation.AspectOrder;
 import com.miao.framework.aop.proxy.AspectProxy;
 import com.miao.framework.aop.proxy.Proxy;
+import com.miao.framework.aop.proxy.ProxyManager;
 import com.miao.framework.core.ClassHelper;
 import com.miao.framework.core.classScanner.ClassScanner;
 import com.miao.framework.core.fault.InitializationError;
+import com.miao.framework.ioc.BeanHelper;
 import com.miao.framework.util.ClassUtil;
 import com.miao.framework.util.StringUtil;
 
 import java.lang.annotation.Annotation;
 import java.util.*;
 
+/**
+ * AOP入口
+ */
 public class AopHelper {
 
     private static final ClassScanner scanner = InstanceFactory.getClassScanner();
@@ -22,7 +27,12 @@ public class AopHelper {
         try {
             Map<Class<?>, List<Class<?>>> proxyWithTargetsMap = createProxyWithTargetsMap();
             Map<Class<?>, List<Proxy>> targetWithProxyInstanceMap = createTargetWithProxyInstanceMap(proxyWithTargetsMap);
-
+            for (Map.Entry<Class<?>, List<Proxy>> entry : targetWithProxyInstanceMap.entrySet()) {
+                Class<?> targetClass = entry.getKey();
+                List<Proxy> proxyInstanceList = entry.getValue();
+                Object proxyInstance = ProxyManager.createProxy(targetClass, proxyInstanceList);
+                BeanHelper.setBeanMap(targetClass, proxyInstance);
+            }
         } catch (IllegalAccessException | InstantiationException e) {
             throw new InitializationError("初始化AOPHelper出错", e);
         }
